@@ -1,0 +1,7 @@
+# Служебное состояние счётчика просмотров (создаётся сервером защиты)
+arena_manual/views_state.json
+arena_manual/views_state.json.tmp
+
+# Python
+__pycache__/
+*.pyc
