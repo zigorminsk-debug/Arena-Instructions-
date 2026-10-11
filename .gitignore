@@ -1,0 +1,19 @@
+# ЛИЧНОЕ И СЛУЖЕБНОЕ — никогда не публикуется:
+#   private/users_plain.json               — пароли в открытом виде (источник правды)
+#   private/Таблица_логинов_и_паролей.xlsx — таблица для выдачи
+#   private/pages/                         — исходные страницы инструкции
+#   private/content_key.bin, build_manifest.json
+#   PDF/PPTX/XLSX автора
+private/
+
+# Состояние счётчиков локального сервера
+server/state/
+arena_manual/views_state.json
+
+# Сгенерированные версии сервера для вставки в панель Deno/Cloudflare
+tools/_generated/
+
+# Python
+__pycache__/
+*.pyc
+.venv/

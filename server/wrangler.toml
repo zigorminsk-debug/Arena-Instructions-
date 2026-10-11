@@ -1,0 +1,18 @@
+# Cloudflare Workers: сервер защиты AI Arena Manual
+# Развёртывание: docs/ЗАЩИТА.md, вариант «Cloudflare Workers».
+name = "arena-protect"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Откуда приходят браузеры клиентов (ваш адрес GitHub Pages или своего сайта).
+APP_ORIGIN = "https://zigorminsk-debug.github.io"
+# Где сервер берёт список доступов (публичный файл, только хеши).
+USERS_URL = "https://raw.githubusercontent.com/zigorminsk-debug/Arena-Instructions-/main/auth/users.json"
+
+# Хранилище счётчиков просмотров. Создайте namespace:
+#   npx wrangler kv namespace create ARENA_KV
+# и вставьте сюда его id.
+[[kv_namespaces]]
+binding = "ARENA_KV"
+id = "ВСТАВЬТЕ_ID_ИЗ_КОМАНДЫ_ВЫШЕ"
