@@ -92,10 +92,12 @@ class Doc(BaseDocTemplate):
     def __init__(self, path, meta):
         self.meta = meta
         from reportlab.lib.pdfencrypt import StandardEncryption
-        # 12345678 — пользовательский пароль на открытие (просмотр + печать).
-        # turbo2*(+ — пароль владельца: полные права (снимает запреты).
+        import local_secrets
+        # Пароли НЕ хранятся в репозитории: только private/user_pass.txt
+        # (открытие/просмотр) и private/owner_pass.txt (полные права).
         # Копирование и изменение запрещены для пользовательского пароля.
-        enc = StandardEncryption("12345678", "turbo2*(+", canPrint=1,
+        enc = StandardEncryption(local_secrets.user_password(),
+                                 local_secrets.owner_password(), canPrint=1,
                                  canModify=0, canCopy=0, canAnnotate=0,
                                  strength=128)
         BaseDocTemplate.__init__(self, path, pagesize=A4,

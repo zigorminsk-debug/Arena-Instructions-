@@ -10,6 +10,8 @@ from reportlab.lib.colors import HexColor
 from reportlab.lib.pdfencrypt import StandardEncryption
 from reportlab.lib.utils import ImageReader
 
+from local_secrets import owner_password
+
 FONT_DIR = "/usr/share/fonts/truetype/dejavu"
 pdfmetrics.registerFont(TTFont("DJ", os.path.join(FONT_DIR, "DejaVuSans.ttf")))
 pdfmetrics.registerFont(TTFont("DJB", os.path.join(FONT_DIR, "DejaVuSans-Bold.ttf")))
@@ -28,9 +30,15 @@ RATIO = {"arena_workspace.png": 322 / 1059.0, "arena_feedback.png": 228 / 787.0,
          "gh_merge.png": 576 / 934.0}
 
 
+password = owner_password()
+
+
 class Deck:
     def __init__(self, path, password):
-        enc = StandardEncryption("12345678", "turbo2*(+", canPrint=1,
+        import local_secrets
+        # пароли — только из private/ (см. arena_manual/local_secrets.py)
+        enc = StandardEncryption(local_secrets.user_password(),
+                                 password, canPrint=1,
                                  canModify=0, canCopy=0, canAnnotate=0,
                                  strength=128)
         self.c = canvas.Canvas(path, pagesize=(W, H), encrypt=enc)
@@ -143,7 +151,7 @@ class Deck:
         self.c.save()
 
 
-d = Deck("/home/user/Презентация_AI_Arena_Agent_Mode_protected.pdf", "turbo2*(+")
+d = Deck("/home/user/Презентация_AI_Arena_Agent_Mode_protected.pdf", password)
 
 # ---- 1 титул
 d.decor()

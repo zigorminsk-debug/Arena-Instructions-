@@ -1,0 +1,15 @@
+name: guard
+
+# Страж репозитория: не даёт случайно закоммитить пароли, открытые страницы
+# инструкции или старые незащищённые файлы.
+on:
+  push:
+  pull_request:
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Проверка публичной части репозитория
+        run: python3 tools/check_repo.py
